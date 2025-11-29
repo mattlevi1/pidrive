@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiDrive - Driver Dashboard</title>
+    <title>AEPiDrive - Get a Safe Ride Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
             --bg-card: #1a1a24;
-            --accent: #00d4aa;
+            --accent: #203ad0;
             --accent-glow: rgba(0, 212, 170, 0.3);
             --text-primary: #ffffff;
             --text-secondary: #8b8b9e;
@@ -20,7 +20,6 @@
             --danger: #ff4757;
             --warning: #ffa502;
             --success: #00d4aa;
-            --waze: #33ccff;
             --border: rgba(255, 255, 255, 0.08);
         }
 
@@ -45,8 +44,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(ellipse at 80% 20%, rgba(51, 204, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 20% 80%, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 20%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -54,45 +53,24 @@
         .container {
             position: relative;
             z-index: 1;
-            max-width: 600px;
+            max-width: 480px;
             margin: 0 auto;
             padding: 24px 20px;
             min-height: 100vh;
         }
 
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .back-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover {
-            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 32px;
         }
 
         .logo {
             font-family: 'Space Mono', monospace;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent);
             letter-spacing: -2px;
+            margin-bottom: 8px;
             text-shadow: 0 0 30px var(--accent-glow);
         }
 
@@ -100,446 +78,340 @@
             color: var(--text-primary);
         }
 
-        .badge {
-            background: var(--waze);
-            color: var(--bg-primary);
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
-        /* Driver Login */
-        .login-card {
+        .status-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 32px 28px;
+            padding: 24px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
-        .login-card h2 {
-            font-size: 1.5rem;
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .queue-count {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
             margin-bottom: 8px;
         }
 
-        .login-card p {
+        .queue-text {
             color: var(--text-secondary);
-            margin-bottom: 24px;
+            font-size: 1rem;
         }
 
-        .driver-select {
+        .driver-status {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .driver-option {
-            padding: 18px 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .driver-option:hover {
-            border-color: var(--text-muted);
-        }
-
-        .driver-option.selected {
-            border-color: var(--accent);
-            background: rgba(0, 212, 170, 0.1);
-        }
-
-        .driver-avatar {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent), var(--waze));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--bg-primary);
+            gap: 16px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
 
-        .driver-info {
-            text-align: left;
-        }
-
-        .driver-name {
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-
-        .driver-vehicle {
-            color: var(--text-secondary);
+        .driver-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border-radius: 100px;
             font-size: 0.85rem;
         }
 
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            border: none;
-            border-radius: 14px;
-            color: var(--bg-primary);
-            font-size: 1rem;
+        .driver-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        .driver-dot.busy {
+            background: var(--warning);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-title {
+            font-size: 1.25rem;
             font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-title svg {
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 18px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
             font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .people-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .people-btn {
+            flex: 1;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .login-btn:hover:not(:disabled) {
+        .people-btn:hover {
+            border-color: var(--text-muted);
+        }
+
+        .people-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            border: none;
+            border-radius: 14px;
+            color: var(--bg-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px var(--accent-glow);
         }
 
-        .login-btn:disabled {
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
-        /* Dashboard */
-        .dashboard {
-            display: none;
-        }
-
-        .dashboard.active {
-            display: block;
-        }
-
-        .status-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .status-toggle {
-            flex: 1;
-            padding: 14px;
-            background: var(--bg-card);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-secondary);
-        }
-
-        .status-toggle.available {
-            border-color: var(--success);
-            background: rgba(0, 212, 170, 0.15);
-            color: var(--success);
-        }
-
-        .status-toggle.busy {
-            border-color: var(--warning);
-            background: rgba(255, 165, 2, 0.15);
-            color: var(--warning);
-        }
-
-        .logout-btn {
-            padding: 14px 20px;
-            background: transparent;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .logout-btn:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-
-        /* Stats */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px 14px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Current Ride */
-        .current-ride {
-            background: linear-gradient(135deg, rgba(51, 204, 255, 0.15), rgba(0, 212, 170, 0.1));
-            border: 2px solid var(--waze);
+        .your-request {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 150, 255, 0.1));
+            border: 1px solid var(--accent);
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 24px;
         }
 
-        .current-ride-header {
+        .your-request-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
         }
 
-        .current-ride-title {
+        .your-request-title {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--waze);
+            color: var(--accent);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .current-ride-title svg {
-            animation: drive 1s ease-in-out infinite;
+        .your-request-position {
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        @keyframes drive {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(3px); }
-        }
-
-        .current-ride-info {
-            margin-bottom: 20px;
-        }
-
-        .ride-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .ride-details {
+        .your-request-details {
             color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        .ride-location {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 12px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+        .your-request-details strong {
+            color: var(--text-primary);
         }
 
-        .ride-location svg {
-            color: var(--danger);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .ride-location-text {
-            font-weight: 500;
-            word-break: break-word;
-        }
-
-        .ride-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .waze-btn {
-            flex: 1;
-            padding: 16px;
-            background: var(--waze);
-            border: none;
-            border-radius: 12px;
-            color: var(--bg-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .waze-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(51, 204, 255, 0.3);
-        }
-
-        .complete-btn {
-            flex: 1;
-            padding: 16px;
-            background: var(--success);
-            border: none;
-            border-radius: 12px;
-            color: var(--bg-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .complete-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow);
-        }
-
-        .drop-btn {
-            padding: 16px;
+        .cancel-btn {
+            width: 100%;
+            padding: 14px;
             background: transparent;
             border: 2px solid var(--danger);
             border-radius: 12px;
             color: var(--danger);
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .drop-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Queue Section */
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title .count {
-            background: var(--bg-secondary);
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .queue-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 12px;
-            transition: all 0.2s;
-        }
-
-        .queue-card:hover {
-            border-color: var(--text-muted);
-        }
-
-        .queue-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .queue-card-name {
-            font-size: 1.15rem;
-            font-weight: 600;
-        }
-
-        .queue-card-time {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .queue-card-details {
-            display: flex;
-            gap: 16px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-        }
-
-        .queue-card-detail {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .queue-card-location {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            padding: 12px 14px;
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .queue-card-location svg {
-            color: var(--danger);
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-
-        .claim-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent);
-            border: none;
-            border-radius: 10px;
-            color: var(--bg-primary);
             font-size: 0.95rem;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.2s;
+            margin-top: 16px;
+            transition: all 0.2s ease;
         }
 
-        .claim-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px var(--accent-glow);
+        .cancel-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .queue-list {
+            margin-top: 24px;
+        }
+
+        .queue-list-title {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .queue-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .queue-item.yours {
+            border-color: var(--accent);
+            background: rgba(0, 212, 170, 0.1);
+        }
+
+        .queue-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .queue-item-position {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .queue-item.yours .queue-item-position {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .queue-item-name {
+            font-weight: 500;
+        }
+
+        .queue-item-people {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .queue-item-status {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .queue-item-status.waiting {
+            background: rgba(255, 165, 2, 0.2);
+            color: var(--warning);
+        }
+
+        .queue-item-status.assigned {
+            background: rgba(0, 212, 170, 0.2);
+            color: var(--success);
         }
 
         .empty-state {
             text-align: center;
-            padding: 48px 20px;
+            padding: 40px 20px;
             color: var(--text-muted);
         }
 
@@ -548,12 +420,40 @@
             opacity: 0.5;
         }
 
-        .empty-state p {
-            font-size: 1rem;
+        footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
         }
 
         .hidden {
             display: none !important;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .toast {
@@ -582,13 +482,6 @@
         .toast.error {
             border-color: var(--danger);
         }
-
-        footer {
-            text-align: center;
-            padding: 32px 20px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
     </style>
 </head>
 <body>
@@ -596,122 +489,89 @@
     
     <div class="container">
         <header>
-            <div class="header-left">
-                <a href="index.html" class="back-link">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    Guest View
-                </a>
-                <div class="logo">pi<span>drive</span></div>
-            </div>
-            <span class="badge">Driver</span>
+            <div class="logo">AEPi<span>Drive</span></div>
+            <p class="tagline">Safe rides home from your brothers</p>
         </header>
 
-        <!-- Driver Login -->
-        <div class="login-card" id="loginCard">
-            <h2>Driver Login</h2>
-            <p>Select your name to start accepting rides</p>
-            
-            <div class="driver-select" id="driverSelect">
-                <div class="driver-option" data-driver="1" data-name="Driver 1" data-vehicle="Vehicle 1">
-                    <div class="driver-avatar">D1</div>
-                    <div class="driver-info">
-                        <div class="driver-name">Driver 1</div>
-                        <div class="driver-vehicle">Vehicle 1</div>
-                    </div>
-                </div>
-                <div class="driver-option" data-driver="2" data-name="Driver 2" data-vehicle="Vehicle 2">
-                    <div class="driver-avatar">D2</div>
-                    <div class="driver-info">
-                        <div class="driver-name">Driver 2</div>
-                        <div class="driver-vehicle">Vehicle 2</div>
-                    </div>
-                </div>
-                <div class="driver-option" data-driver="3" data-name="Driver 3" data-vehicle="Vehicle 3">
-                    <div class="driver-avatar">D3</div>
-                    <div class="driver-info">
-                        <div class="driver-name">Driver 3</div>
-                        <div class="driver-vehicle">Vehicle 3</div>
-                    </div>
-                </div>
+        <div class="status-card">
+            <div class="status-label">Currently in Queue</div>
+            <div class="queue-count" id="queueCount">0</div>
+            <div class="queue-text">people waiting</div>
+            <div class="driver-status" id="driverStatus">
+                <!-- Driver badges will be inserted here -->
             </div>
-            
-            <button class="login-btn" id="loginBtn" disabled>Go Online</button>
         </div>
 
-        <!-- Dashboard -->
-        <div class="dashboard" id="dashboard">
-            <div class="status-bar">
-                <button class="status-toggle available" id="statusToggle">
-                    <span id="statusText">🟢 Available</span>
-                </button>
-                <button class="logout-btn" id="logoutBtn">Log Out</button>
+        <!-- Request Form -->
+        <div class="form-card" id="requestForm">
+            <h2 class="form-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                Request a Ride
+            </h2>
+            
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="First name is fine" autocomplete="off">
             </div>
+            
+            <div class="form-group">
+                <label for="location">Pickup Location</label>
+                <input type="text" id="location" placeholder="Address or description (e.g. 'Blue house on Main St')">
+            </div>
+            
+            <div class="form-group">
+                <label>Number of People</label>
+                <div class="people-selector">
+                    <button type="button" class="people-btn active" data-count="1">1</button>
+                    <button type="button" class="people-btn" data-count="2">2</button>
+                    <button type="button" class="people-btn" data-count="3">3</button>
+                    <button type="button" class="people-btn" data-count="4">4+</button>
+                </div>
+            </div>
+            
+            <button type="button" class="submit-btn" id="submitBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Add Me to the List
+            </button>
+        </div>
 
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-value" id="queueCount">0</div>
-                    <div class="stat-label">In Queue</div>
+        <!-- Your Request (shown when user has a pending request) -->
+        <div class="your-request hidden" id="yourRequest">
+            <div class="your-request-header">
+                <div class="your-request-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    You're on the list!
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="completedCount">0</div>
-                    <div class="stat-label">Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="driversOnline">0</div>
-                    <div class="stat-label">Online</div>
-                </div>
+                <span class="your-request-position" id="yourPosition">#1</span>
             </div>
+            <div class="your-request-details" id="yourDetails">
+                <!-- Details will be inserted here -->
+            </div>
+            <button type="button" class="cancel-btn" id="cancelBtn">Cancel My Request</button>
+        </div>
 
-            <!-- Current Ride -->
-            <div class="current-ride hidden" id="currentRide">
-                <div class="current-ride-header">
-                    <div class="current-ride-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-1.4-3.1C16.1 5.8 15 5 13.8 5H6.2c-1.2 0-2.3.8-2.8 1.9L2 10l-2.5 1.1c-.8.2-1.5 1-1.5 1.9v3c0 .6.4 1 1 1h2"/>
-                            <circle cx="7" cy="17" r="2"/>
-                            <circle cx="17" cy="17" r="2"/>
-                        </svg>
-                        Current Pickup
-                    </div>
-                </div>
-                <div class="current-ride-info">
-                    <div class="ride-name" id="rideName">-</div>
-                    <div class="ride-details">
-                        <span id="ridePeople">-</span> • Added <span id="rideTime">-</span>
-                    </div>
-                    <div class="ride-location">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <span class="ride-location-text" id="rideLocation">-</span>
-                    </div>
-                </div>
-                <div class="ride-actions">
-                    <a href="#" class="waze-btn" id="wazeBtn" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                        </svg>
-                        Open in Waze
-                    </a>
-                    <button class="complete-btn" id="completeBtn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                        Done
-                    </button>
-                    <button class="drop-btn" id="dropBtn" title="Release this ride">✕</button>
-                </div>
-            </div>
-
-            <!-- Queue -->
-            <div class="section-title">
-                Waiting for Pickup <span class="count" id="waitingCount">0</span>
-            </div>
-            <div id="queueList">
+        <!-- Queue List -->
+        <div class="queue-list" id="queueList">
+            <h3 class="queue-list-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"/>
+                    <line x1="8" y1="12" x2="21" y2="12"/>
+                    <line x1="8" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+                Current Queue
+            </h3>
+            <div id="queueItems">
                 <div class="empty-state">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="12" cy="12" r="10"/>
@@ -719,13 +579,14 @@
                         <line x1="9" y1="9" x2="9.01" y2="9"/>
                         <line x1="15" y1="9" x2="15.01" y2="9"/>
                     </svg>
-                    <p>No one waiting right now.<br>Nice work! 🎉</p>
+                    <p>No one in line yet.<br>Be the first!</p>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>Drive safe, stay focused 🚗</p>
+            <p>Drive safe, get home safe 🚗</p>
+            <p style="margin-top: 8px;"><a href="driver.html">Driver Dashboard →</a></p>
         </footer>
     </div>
 
@@ -752,203 +613,92 @@
         const database = firebase.database();
 
         // State
-        let currentDriver = null;
-        let currentRideId = null;
-        let driverStatus = 'available';
-        let completedTonight = parseInt(localStorage.getItem('beeplist_completed') || '0');
+        let selectedPeople = 1;
+        let userRequestId = localStorage.getItem('beeplist_request_id');
 
         // DOM Elements
-        const loginCard = document.getElementById('loginCard');
-        const dashboard = document.getElementById('dashboard');
-        const loginBtn = document.getElementById('loginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const statusToggle = document.getElementById('statusToggle');
-        const statusText = document.getElementById('statusText');
         const queueCountEl = document.getElementById('queueCount');
-        const completedCountEl = document.getElementById('completedCount');
-        const driversOnlineEl = document.getElementById('driversOnline');
-        const waitingCountEl = document.getElementById('waitingCount');
-        const currentRideEl = document.getElementById('currentRide');
-        const queueListEl = document.getElementById('queueList');
+        const driverStatusEl = document.getElementById('driverStatus');
+        const requestFormEl = document.getElementById('requestForm');
+        const yourRequestEl = document.getElementById('yourRequest');
+        const yourPositionEl = document.getElementById('yourPosition');
+        const yourDetailsEl = document.getElementById('yourDetails');
+        const queueItemsEl = document.getElementById('queueItems');
+        const submitBtn = document.getElementById('submitBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const nameInput = document.getElementById('name');
+        const locationInput = document.getElementById('location');
         const toastEl = document.getElementById('toast');
 
-        // Current ride elements
-        const rideNameEl = document.getElementById('rideName');
-        const ridePeopleEl = document.getElementById('ridePeople');
-        const rideTimeEl = document.getElementById('rideTime');
-        const rideLocationEl = document.getElementById('rideLocation');
-        const wazeBtn = document.getElementById('wazeBtn');
-        const completeBtn = document.getElementById('completeBtn');
-        const dropBtn = document.getElementById('dropBtn');
-
-        // Update completed count display
-        completedCountEl.textContent = completedTonight;
-
-        // Driver selection
-        document.querySelectorAll('.driver-option').forEach(option => {
-            option.addEventListener('click', () => {
-                document.querySelectorAll('.driver-option').forEach(o => o.classList.remove('selected'));
-                option.classList.add('selected');
-                loginBtn.disabled = false;
+        // People selector
+        document.querySelectorAll('.people-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.people-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedPeople = parseInt(btn.dataset.count);
             });
         });
 
-        // Login
-        loginBtn.addEventListener('click', async () => {
-            const selected = document.querySelector('.driver-option.selected');
-            if (!selected) return;
+        // Submit request
+        submitBtn.addEventListener('click', async () => {
+            const name = nameInput.value.trim();
+            const location = locationInput.value.trim();
 
-            currentDriver = {
-                id: selected.dataset.driver,
-                name: selected.dataset.name,
-                vehicle: selected.dataset.vehicle
-            };
-
-            try {
-                await database.ref('drivers/' + currentDriver.id).set({
-                    name: currentDriver.name,
-                    vehicle: currentDriver.vehicle,
-                    status: 'available',
-                    lastActive: Date.now()
-                });
-
-                loginCard.classList.add('hidden');
-                dashboard.classList.add('active');
-                showToast(`Welcome, ${currentDriver.name}!`, 'success');
-
-                // Set up presence
-                setupPresence();
-            } catch (error) {
-                console.error('Login error:', error);
-                showToast('Error logging in. Please try again.', 'error');
-            }
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', async () => {
-            if (currentRideId) {
-                if (!confirm('You have an active ride. Logging out will release it. Continue?')) {
-                    return;
-                }
-                await releaseRide();
-            }
-
-            if (currentDriver) {
-                await database.ref('drivers/' + currentDriver.id).remove();
-            }
-
-            currentDriver = null;
-            currentRideId = null;
-            dashboard.classList.remove('active');
-            loginCard.classList.remove('hidden');
-            document.querySelectorAll('.driver-option').forEach(o => o.classList.remove('selected'));
-            loginBtn.disabled = true;
-        });
-
-        // Status toggle
-        statusToggle.addEventListener('click', async () => {
-            if (!currentDriver) return;
-
-            driverStatus = driverStatus === 'available' ? 'busy' : 'available';
-            
-            await database.ref('drivers/' + currentDriver.id + '/status').set(driverStatus);
-
-            statusToggle.className = `status-toggle ${driverStatus}`;
-            statusText.textContent = driverStatus === 'available' ? '🟢 Available' : '🟡 Busy';
-        });
-
-        // Complete ride
-        completeBtn.addEventListener('click', async () => {
-            if (!currentRideId) return;
-
-            try {
-                await database.ref('requests/' + currentRideId).update({
-                    status: 'completed',
-                    completedAt: Date.now()
-                });
-
-                completedTonight++;
-                localStorage.setItem('beeplist_completed', completedTonight);
-                completedCountEl.textContent = completedTonight;
-
-                currentRideId = null;
-                currentRideEl.classList.add('hidden');
-                showToast('Ride completed! Great job! 🎉', 'success');
-            } catch (error) {
-                console.error('Error completing ride:', error);
-                showToast('Error completing ride', 'error');
-            }
-        });
-
-        // Drop/release ride
-        dropBtn.addEventListener('click', async () => {
-            if (!currentRideId) return;
-
-            if (confirm('Release this ride back to the queue?')) {
-                await releaseRide();
-                showToast('Ride released to queue', 'success');
-            }
-        });
-
-        async function releaseRide() {
-            if (!currentRideId) return;
-
-            try {
-                await database.ref('requests/' + currentRideId).update({
-                    status: 'waiting',
-                    assignedDriver: null
-                });
-
-                currentRideId = null;
-                currentRideEl.classList.add('hidden');
-            } catch (error) {
-                console.error('Error releasing ride:', error);
-            }
-        }
-
-        // Claim a ride
-        async function claimRide(requestId) {
-            if (!currentDriver) return;
-            if (currentRideId) {
-                showToast('Complete your current ride first', 'error');
+            if (!name || !location) {
+                showToast('Please fill in all fields', 'error');
                 return;
             }
 
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"><span class="spinner"></span> Adding...</span>';
+
             try {
-                await database.ref('requests/' + requestId).update({
-                    status: 'assigned',
-                    assignedDriver: currentDriver.id
+                const newRequestRef = database.ref('requests').push();
+                await newRequestRef.set({
+                    name: name,
+                    location: location,
+                    people: selectedPeople,
+                    status: 'waiting',
+                    timestamp: Date.now(),
+                    assignedDriver: null
                 });
 
-                currentRideId = requestId;
-                showToast('Ride claimed!', 'success');
+                userRequestId = newRequestRef.key;
+                localStorage.setItem('beeplist_request_id', userRequestId);
+                
+                nameInput.value = '';
+                locationInput.value = '';
+                showToast('You\'re on the list!', 'success');
             } catch (error) {
-                console.error('Error claiming ride:', error);
-                showToast('Error claiming ride', 'error');
+                console.error('Error adding request:', error);
+                showToast('Error adding request. Please try again.', 'error');
             }
-        }
 
-        // Set up presence system
-        function setupPresence() {
-            if (!currentDriver) return;
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Add Me to the List
+            `;
+        });
 
-            const driverRef = database.ref('drivers/' + currentDriver.id);
-            const connectedRef = database.ref('.info/connected');
+        // Cancel request
+        cancelBtn.addEventListener('click', async () => {
+            if (!userRequestId) return;
 
-            connectedRef.on('value', (snap) => {
-                if (snap.val() === true) {
-                    driverRef.onDisconnect().remove();
-                    driverRef.update({ lastActive: Date.now() });
+            if (confirm('Are you sure you want to cancel your ride request?')) {
+                try {
+                    await database.ref('requests/' + userRequestId).remove();
+                    localStorage.removeItem('beeplist_request_id');
+                    userRequestId = null;
+                    showToast('Request cancelled', 'success');
+                } catch (error) {
+                    console.error('Error cancelling request:', error);
+                    showToast('Error cancelling. Please try again.', 'error');
                 }
-            });
-
-            // Update last active periodically
-            setInterval(() => {
-                if (currentDriver) {
-                    driverRef.update({ lastActive: Date.now() });
-                }
-            }, 30000);
-        }
+            }
+        });
 
         // Listen for queue updates
         database.ref('requests').orderByChild('timestamp').on('value', (snapshot) => {
@@ -957,39 +707,38 @@
                 requests.push({ id: child.key, ...child.val() });
             });
 
-            // Filter active requests
-            const waitingRequests = requests.filter(r => r.status === 'waiting');
-            const assignedRequests = requests.filter(r => r.status === 'assigned');
-            const activeRequests = [...waitingRequests, ...assignedRequests];
-
-            // Update stats
+            // Filter to only waiting/assigned requests
+            const activeRequests = requests.filter(r => r.status === 'waiting' || r.status === 'assigned');
+            
+            // Update queue count
             queueCountEl.textContent = activeRequests.length;
-            waitingCountEl.textContent = waitingRequests.length;
 
-            // Check if we have a current ride
-            if (currentRideId) {
-                const myRide = requests.find(r => r.id === currentRideId);
-                if (myRide && myRide.status === 'assigned') {
-                    updateCurrentRide(myRide);
-                } else if (!myRide || myRide.status === 'completed') {
-                    // Ride was cancelled or completed elsewhere
-                    currentRideId = null;
-                    currentRideEl.classList.add('hidden');
+            // Check if user has a request
+            const userRequest = activeRequests.find(r => r.id === userRequestId);
+            const userPosition = userRequest ? activeRequests.indexOf(userRequest) + 1 : -1;
+
+            if (userRequest) {
+                requestFormEl.classList.add('hidden');
+                yourRequestEl.classList.remove('hidden');
+                yourPositionEl.textContent = `#${userPosition}`;
+                yourDetailsEl.innerHTML = `
+                    <strong>${userRequest.name}</strong> • ${userRequest.people} ${userRequest.people === 1 ? 'person' : 'people'}<br>
+                    📍 ${userRequest.location}<br>
+                    ${userRequest.status === 'assigned' ? '<span style="color: var(--success);">🚗 Driver is on the way!</span>' : '⏳ Waiting for driver...'}
+                `;
+            } else {
+                requestFormEl.classList.remove('hidden');
+                yourRequestEl.classList.add('hidden');
+                // Clear the stored ID if request doesn't exist anymore
+                if (userRequestId && !requests.find(r => r.id === userRequestId)) {
+                    localStorage.removeItem('beeplist_request_id');
+                    userRequestId = null;
                 }
             }
 
-            // Check for newly assigned rides to this driver
-            if (currentDriver && !currentRideId) {
-                const myAssigned = assignedRequests.find(r => r.assignedDriver === currentDriver.id);
-                if (myAssigned) {
-                    currentRideId = myAssigned.id;
-                    updateCurrentRide(myAssigned);
-                }
-            }
-
-            // Update queue list (only waiting requests)
-            if (waitingRequests.length === 0) {
-                queueListEl.innerHTML = `
+            // Update queue list
+            if (activeRequests.length === 0) {
+                queueItemsEl.innerHTML = `
                     <div class="empty-state">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="10"/>
@@ -997,37 +746,20 @@
                             <line x1="9" y1="9" x2="9.01" y2="9"/>
                             <line x1="15" y1="9" x2="15.01" y2="9"/>
                         </svg>
-                        <p>No one waiting right now.<br>Nice work! 🎉</p>
+                        <p>No one in line yet.<br>Be the first!</p>
                     </div>
                 `;
             } else {
-                queueListEl.innerHTML = waitingRequests.map(request => `
-                    <div class="queue-card">
-                        <div class="queue-card-header">
-                            <div class="queue-card-name">${escapeHtml(request.name)}</div>
-                            <div class="queue-card-time">${timeAgo(request.timestamp)}</div>
+                queueItemsEl.innerHTML = activeRequests.map((request, index) => `
+                    <div class="queue-item ${request.id === userRequestId ? 'yours' : ''}">
+                        <div class="queue-item-info">
+                            <div class="queue-item-position">${index + 1}</div>
+                            <div>
+                                <div class="queue-item-name">${escapeHtml(request.name)}</div>
+                                <div class="queue-item-people">${request.people} ${request.people === 1 ? 'person' : 'people'}</div>
+                            </div>
                         </div>
-                        <div class="queue-card-details">
-                            <span class="queue-card-detail">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="9" cy="7" r="4"/>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                </svg>
-                                ${request.people} ${request.people === 1 ? 'person' : 'people'}
-                            </span>
-                        </div>
-                        <div class="queue-card-location">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>${escapeHtml(request.location)}</span>
-                        </div>
-                        <button class="claim-btn" onclick="claimRide('${request.id}')">
-                            Claim This Ride
-                        </button>
+                        <span class="queue-item-status ${request.status}">${request.status === 'assigned' ? 'Pickup' : 'Waiting'}</span>
                     </div>
                 `).join('');
             }
@@ -1035,38 +767,28 @@
 
         // Listen for driver updates
         database.ref('drivers').on('value', (snapshot) => {
-            let count = 0;
-            snapshot.forEach(() => count++);
-            driversOnlineEl.textContent = count;
+            const drivers = [];
+            snapshot.forEach((child) => {
+                drivers.push({ id: child.key, ...child.val() });
+            });
+
+            if (drivers.length === 0) {
+                driverStatusEl.innerHTML = '<span class="driver-badge"><span class="driver-dot busy"></span>No drivers online</span>';
+            } else {
+                driverStatusEl.innerHTML = drivers.map(driver => `
+                    <span class="driver-badge">
+                        <span class="driver-dot ${driver.status === 'available' ? '' : 'busy'}"></span>
+                        ${escapeHtml(driver.name)}
+                    </span>
+                `).join('');
+            }
         });
-
-        // Update current ride display
-        function updateCurrentRide(ride) {
-            currentRideEl.classList.remove('hidden');
-            rideNameEl.textContent = ride.name;
-            ridePeopleEl.textContent = `${ride.people} ${ride.people === 1 ? 'person' : 'people'}`;
-            rideTimeEl.textContent = timeAgo(ride.timestamp);
-            rideLocationEl.textContent = ride.location;
-
-            // Create Waze deep link
-            const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(ride.location)}&navigate=yes`;
-            wazeBtn.href = wazeUrl;
-        }
 
         // Helper functions
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
-        }
-
-        function timeAgo(timestamp) {
-            const seconds = Math.floor((Date.now() - timestamp) / 1000);
-            if (seconds < 60) return 'just now';
-            const minutes = Math.floor(seconds / 60);
-            if (minutes < 60) return `${minutes}m ago`;
-            const hours = Math.floor(minutes / 60);
-            return `${hours}h ago`;
         }
 
         function showToast(message, type = 'success') {
